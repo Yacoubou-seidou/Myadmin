@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://kit.fontawesome.com/a798d8001a.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
+
+  <title>AdminBoard</title>
+</head>
+<body>
+<!--navbar-->
+<div class="navbar ">
+  <nav class=" blue accent-3">
+    <div class="container">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">MYadmin</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="index.html" class="actived selected">Dashboard</a></li>
+          <li><a href="Post.html">Posts</a></li>
+          <li><a href="Categories.html">Categories</a></li>
+          <li><a href="Comments.html">Comments</a></li>
+          <li><a href="User.html">Users</a></li>
+          <li><a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons">menu</i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<!--Mobile trigger-->
+<ul class="sidenav" id="mobile-demo">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="images/maison3.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="images/user3.png"></a>
+      <a href="#name"><span class="white-text name">John Doe</span></a>
+      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div>
+  </li>
+<li><a href="index.html"><i class="material-icons">apps</i>Dashboard</a></li>
+<li><a href="Post.html">Posts</a></li>
+<li><a href="Categories.html">Categories</a></li>
+<li><a href="Comments.html">Comments</a></li>
+<li><a href="User.html">Users</a></li>
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li><a class="subheader">Account Controls</a></li>
+  <li><a class="" href="#!">Logout</a></li>
+</ul>
+
+<!--Side nav-->
+<ul id="slide-out" class="sidenav">
+  <li>
+    <div class="user-view">
+      <div class="background">
+        <img src="images/maison3.jpg">
+      </div>
+      <a href="#user"><img class="circle" src="images/user3.png"></a>
+      <a href="#name"><span class="white-text name">John Doe</span></a>
+      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    </div>
+  </li>
+  <li><a href="index.html"><i class="material-icons">apps</i>Dashboard</a></li>
+  <li><a href="Post.html">Posts</a></li>
+  <li><a href="Categories.html">Categories</a></li>
+  <li><a href="Comments.html">Comments</a></li>
+  <li><a href="User.html">Users</a></li>
+  
+  <li>
+    <div class="divider"></div>
+  </li>
+  <li><a class="subheader">Account Controls</a></li>
+  <li><a class="" href="#!">Logout</a></li>
+</ul>
+<!--card-->
+<div class="container-fluid grey lighten-5" style="padding-bottom: 2rem;">
+<div class="" style="padding-bottom: 2rem; padding-top: 2rem;">
+  <div class="row" style="margin-bottom: -22px;">
+    <div class="col s12 m3 center ">
+      <div class="card blue darken-1" style="padding: 2rem;">
+      <i class="fa-regular fa-face-grin fa-3x white-text"></i>
+        <h6>Monthly Visitors</h6>
+        <p>35900</p>
+        <div class="progress">
+          <div class="determinate" style="width: 40%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m3 center black-text">
+      <div class="card" style="padding: 2rem;">
+        <i class="fa-solid fa-pen fa-3x"></i>
+        <h6>Blog Posts</h6>
+        <p>207</p>
+        <div class="progress">
+          <div class="determinate" style="width: 15%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m3 center black-text">
+      <div class="card blue darken-1" style="padding: 2rem;">
+        <i class="fa-solid fa-message fa-3x white-text"></i>
+        <h6>Comments</h6>
+        <p>2300</p>
+        <div class="progress">
+          <div class="determinate" style="width: 45%"></div>
+        </div>
+      </div>
+    </div>
+    <div class="col s12 m3 center black-text">
+      <div class="card" style="padding: 2rem;">
+        <i class="fa-solid fa-users fa-3x "></i>
+        <h6>users</h6>
+        <p>410</p>
+        <div class="progress">
+          <div class="determinate" style="width: 10%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!--graphique-->
+
+<div class="container-fluid light-blue accent-1">
+
+<div class="row" style="margin: 0;">
+  <div class="col s12 m8">
+    <div class="card">
+    <canvas id="myChart" width="auto" height="100%"></canvas>
+    <script>
+      const ctx = document.getElementById('myChart').getContext('2d');
+      const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+          datasets: [{
+            label: '# of Votes',
+            data: [450, 100, 530, 420, 450, 500, 480, 485, 90, 500, 480, 520],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+      </div>
+  </div>
+  <div class="col s12 m4">
+  <div class="card">
+<div class="card-content">
+  <h5 >Latest Comments</h5>
+<ul class="collection">
+  <li class="collection-item avatar">
+    <img src="images/user1.png" alt="" class="circle">
+    <span class="title">Hatake Kakashi</span>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt, voluptas?</p>
+    <p><a href="" class="green-text accent-1-text">Approve </a>|<a href="" class=" red-text darken-2-text"> Deny</a></p>  
+  </li>
+  <li class="collection-item avatar">
+    <img src="images/user2.png" alt="" class="circle">
+    <span class="title">Alucard val</span>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt, voluptas?</p>
+    <p><a href="" class="green-text accent-1-text">Approve </a>|<a href="" class=" red-text darken-2-text"> Deny</a></p>
+  </li>
+  <li class="collection-item avatar">
+    <img src="images/user3.png" alt="" class="circle">
+    <span class="title">Daiki Aominé</span>
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deserunt, voluptas?</p>
+    <p><a href="" class="green-text accent-1-text">Approve </a>|<a href="" class=" red-text darken-2-text"> Deny</a></p>
+  </li>
+</ul>
+</div>
+</div>
+  </div>
+</div>  
+</div>
+<!--posts-->
+<div class="container-fluid grey lighten-5">
+
+  <div class="row" style="margin-bottom: 0;">
+    <div class="col s12 m8">
+      <div class="card" style="padding: 1rem;">
+       <h5>Recent Posts</h5>
+       <table>
+         <thead>
+             <th>Title</th>
+             <th>Category</th>
+             <th></th>
+           </thead>
+           <tbody>
+             <tr class="grey lighten-2">
+               <td>Post One</td>
+               <td>Web Development</td>
+               <td><a href="" class="btn blue lighten-2">Details</a></td>
+             </tr>
+             <tr>
+               <td>Post One</td>
+               <td>Graphic Design</td>
+               <td><a href="" class="btn blue lighten-2">Details</a></td>
+             </tr>
+             <tr class="grey lighten-2">
+               <td>Post Three</td>
+               <td>Web Development</td>
+               <td><a href="" class="btn blue lighten-2">Details</a></td>
+             </tr>
+           </tbody>
+       </table>
+      </div>
+    </div>
+    <div class="col s12 m4">
+      <div class="card">
+        <div class="card-content">
+          <ul class="collection with-header" >
+            <li class="collection-header">
+              <h4>Quick Todos</h4>
+            </li>
+            <div class="row">
+              <form class="col s12">
+                <div class="row">
+                  <div class="input-field col s12 m12">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Add Todo...</label>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <li class="collection-item">
+              <div>Todo One<a href="#!" class="secondary-content"><i class="material-icons ">clear</i></a></div>
+            </li>
+            <li class="collection-item">
+              <div>Todo Two<a href="#!" class="secondary-content"><i class="material-icons ">clear</i></a></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+<!--Footer-->
+  <footer class="page-footer blue darken-3 center">
+    <div class="container">
+      <div class="row">
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+      MyAdmin Yacos Copyright &copy; 2022
+    
+      </div>
+    </div>
+  </footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--floting btn-->
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">add</i>
+  </a>
+  <ul>
+    <li><a class="btn-floating blue darken-3 modal-trigger" href="#modal1"><i class="material-icons">edit</i></a></li>
+    <li><a class="btn-floating blue darken-3  modal-trigger" href="#modal2"><i class="material-icons">folder</i></a></li>
+    <li><a class="btn-floating blue darken-3 modal-trigger" href="#modal3"><i class="material-icons">people
+</i></a></li>
+  </ul>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Add Post</h4>
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="textarea1" class="materialize-textarea"></textarea>
+              <label for="textarea1">Title</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+      <div class="input-field col s12">
+        <select>
+          <option value="" disabled selected>Select option</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+          <option value="3">Option 3</option>
+        </select>
+        <label>Category</label>
+      </div>
+      </div>
+      <div class="row">
+        <div id="editor">
+        </div>
+        <script>
+          ClassicEditor
+            .create(document.querySelector('#editor'))
+            .catch(error => {
+              console.error(error);
+            });
+        </script>
+
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close blue lighten-2  btn">SUBMIT</a>
+      </div>
+  </div>
+</div>
+<!-- Modal Structure -->
+<div id="modal2" class="modal">
+  <div class="modal-content" style="padding-bottom: 0px;">
+    <h4>Add Category</h4>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Title</label>
+        </div>
+      </div>
+    </form>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close blue lighten-2 btn">SUBMIT</a>
+  </div>
+</div>
+<!-- Modal Structure -->
+<div id="modal3" class="modal">
+  <div class="modal-content">
+    <h4>Add User</h4>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s12">
+          <input  id="first_name" type="text" class="validate">
+          <label for="first_name">Name</label>
+        </div>
+      
+      </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email" type="email" class="validate">
+        <label for="email">Email</label>
+      </div>
+    </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Confirm Password</label>
+        </div>
+      </div>
+      
+     
+    </form>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close blue lighten-2 btn">SUBMIT</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+     $(document).ready(function () {
+        $('.sidenav').sidenav();
+      });
+  </script>
+  <script>
+     $(document).ready(function () {
+        $('.fixed-action-btn').floatingActionButton();
+      });
+  </script>
+  <script>
+     $(document).ready(function () {
+        $('.modal').modal();
+      });
+  </script>
+  <script>
+    $(document).ready(function () {
+        $('select').formSelect();
+      });
+    
+  </script>
+</body>
+</html>
